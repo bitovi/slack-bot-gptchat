@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  app:
+    container_name: app
+    build: .
+    restart: always
+
+    # Specify a .env file for credentials
+    # the `AWS_INSTANCE_URL` environment variable will be prepended to that file
+    env_file: .env
+
+    volumes:
+      - .:/app
