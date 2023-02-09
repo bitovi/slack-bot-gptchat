@@ -4,9 +4,10 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack import WebClient
 from slack_bolt import App
 
+
 # Event API & Web API
-app = App(token=os.environ['SLACK_BOT_TOKEN']) 
-client = WebClient(os.environ['SLACK_BOT_TOKEN'])
+app = App(token=os.environ['SLACK_BOT_APP_TOKEN']) 
+client = WebClient(os.environ['SLACK_BOT_APP_TOKEN'])
 
 # This gets activated when the bot is tagged in a channel    
 @app.event("app_mention")
@@ -39,4 +40,4 @@ def handle_message_events(body, logger):
                                        text=f"Here you go: \n{response}")
 
 if __name__ == "__main__":
-    SocketModeHandler(app, os.environ['SLACK_APP_TOKEN']).start()
+    SocketModeHandler(app, os.environ['SLACK_API_KEY']).start()

@@ -89,8 +89,6 @@ jobs:
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         dot_env: ${{ secrets.DOT_ENV }}
 
-        app_port: 3000
-
     - if: ${{ steps.deploy.outputs.vm_url != '' }}
       name: Print result created
       run: |
