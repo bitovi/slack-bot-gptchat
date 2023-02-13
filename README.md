@@ -88,15 +88,4 @@ jobs:
 
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         dot_env: ${{ secrets.DOT_ENV }}
-
-    - if: ${{ steps.deploy.outputs.vm_url != '' }}
-      name: Print result created
-      run: |
-        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ steps.deploy.outputs.vm_url == '' }}
-      name: Print result destroyed
-      run: |
-        echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
-        echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
 ```
