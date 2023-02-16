@@ -1,0 +1,25 @@
+name: Build and Publish Docker image
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ main ]
+  release:
+    types: [published]
+#:  pull_request: 
+#    branches:
+#      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - id: docker-publish
+      uses:  bitovi/github-actions-docker-publish@v1
+      with:
+        docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
+        docker_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repo_name: slack-bot-gptchat
+    - run: |
+        echo "Image Created:  ${{ env.image }}"
+        echo "Tag Created: ${{ env.tag }}"
