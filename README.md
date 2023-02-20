@@ -1,8 +1,20 @@
 # Slack Bot for GPT Chat
-Simple slack bot to connect to GPT Chat
+Simple slack bot to connect to GPT Chat.
 
+This project uses:
+- slack-bolt for Python
+
+# Need help or have questions?
+This project is supported by [Bitovi, a DevOps consultancy](https://www.bitovi.com/devops-consulting). You can get help or ask questions on our:
+- Discord Community
+- [Twitter](https://twitter.com/bitovi)
+- [LinkedIn](https://www.linkedin.com/company/bitovi)
+
+Or, you can hire us for training, consulting, or development. Set up a free consultation.
 
 # Inspiration
+
+The inspiration for this project is here:
 https://medium.com/@alexandre.tkint/integrate-openais-chatgpt-within-slack-a-step-by-step-approach-bea43400d311
 
 
