@@ -6,7 +6,7 @@ This project uses:
 
 # Need help or have questions?
 This project is supported by [Bitovi, a DevOps consultancy](https://www.bitovi.com/devops-consulting). You can get help or ask questions on our:
-- Discord Community
+- [Discord Community](https://discord.gg/J7ejFsZnJ4)
 - [Twitter](https://twitter.com/bitovi)
 - [LinkedIn](https://www.linkedin.com/company/bitovi)
 
