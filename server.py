@@ -38,15 +38,15 @@ def handle_message_events(body, logger):
     # Check ChatGPT
     openai.api_key = openai_api_key
 
-    if openai_engine.startswith("gpt-3.")
+    if openai_engine.startswith('gpt-3.'):
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model=openai_engine,
             messages=[
-                {"role": "user", "content": "{prompt}"},
+                {"role": "user", "content": f"{prompt}"},
             ]
         ).choices[0].message.content
 
-    else
+    else:
         response = openai.Completion.create(
             engine=openai_engine,
             prompt=prompt,
