@@ -40,7 +40,7 @@ def handle_message_events(body, logger):
     response = openai.Completion.create(
         engine=openai_engine,
         prompt=prompt,
-        max_tokens=openai_max_tokens,
+        max_tokens=int(openai_max_tokens),
         n=1,
         stop=None,
         temperature=0.5).choices[0].text
