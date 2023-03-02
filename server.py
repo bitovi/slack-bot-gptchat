@@ -37,19 +37,29 @@ def handle_message_events(body, logger):
     
     # Check ChatGPT
     openai.api_key = openai_api_key
-    response = openai.Completion.create(
-        engine=openai_engine,
-        prompt=prompt,
-        max_tokens=int(openai_max_tokens),
-        n=1,
-        stop=None,
-        temperature=0.5).choices[0].text
+
+    if openai_engine.startswith("gpt-3.")
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": "{prompt}"},
+            ]
+        ).choices[0].message.content
+
+    else
+        response = openai.Completion.create(
+            engine=openai_engine,
+            prompt=prompt,
+            max_tokens=int(openai_max_tokens),
+            n=1,
+            stop=None,
+            temperature=0.5).choices[0].text
     
     
     # Reply to thread 
     response = client.chat_postMessage(channel=body["event"]["channel"], 
                                        thread_ts=body["event"]["event_ts"],
-                                       text=f"{openai_reply_msg}")
+                                       text=f"{openai_reply_msg}{response}")
 
 if __name__ == "__main__":
     SocketModeHandler(app, slack_app_token).start()
