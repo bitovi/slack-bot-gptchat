@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   gptchatbot:
-    image: bitovi/slack-bot-gptchat:0.2.0
+    image: bitovi/slack-bot-gptchat:v0.2.0
     container_name: gptchatbot
     build: .
     restart: always
