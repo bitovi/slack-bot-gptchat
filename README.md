@@ -70,6 +70,14 @@ OPENAI_API_KEY="sk-......."
 SLACK_BOT_APP_TOKEN="xapp-......."
 SLACK_API_KEY="xoxb-......."
 ```
+You can add the following variables too, if you feel the need to adjust them:
+```
+OPENAI_ENGINE="gpt-3.5-turbo"
+OPENAI_TOKENS="4096"
+OPENAI_ACK_MSG="Hello from your bot! :robot_face: \nThanks for your request, I'm on it!"
+OPENAI_REPLY_MSG="Here you go: \n"
+```
+See OpenAI engine models (here)[https://platform.openai.com/docs/models]
 
 ## Step 5: Create a GitHub Action workflow file
 `.github/workflows/deploy.yaml`
