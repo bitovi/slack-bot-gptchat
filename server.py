@@ -5,11 +5,17 @@ from slack import WebClient
 from slack_bolt import App
 
 # TODO: rename .env.example
-# OPENAI_API_KEY="sk-......."
-# SLACK_BOT_APP_TOKEN="xapp-......."
-# SLACK_API_KEY="xoxb-......." (SLACK_APP_TOKEN)
+
+# NEEDED Environment Variables 
+openai_api_key = os.environ['OPENAI_API_KEY']
 slack_app_token = os.environ['SLACK_BOT_APP_TOKEN']
 slack_bot_token = os.environ['SLACK_API_KEY']
+# Optional Environment variables
+openai_engine = os.environ.get('OPENAI_ENGINE', 'gpt-3.5-turbo')
+openai_max_tokens = os.environ.get('OPENAI_MAX_TOKENS', '1024')
+openai_ack_msg = os.environ.get('OPENAI_ACK_MSG', "Hello from your bot! :robot_face: \nThanks for your request, I'm on it!")
+openai_reply_msg = os.environ.get('OPENAI_REPLY_MSG', "Here you go: \n")
+
 
 # Event API & Web API
 app = App(token=slack_bot_token) 
@@ -27,14 +33,14 @@ def handle_message_events(body, logger):
     # Let thre user know that we are busy with the request 
     response = client.chat_postMessage(channel=body["event"]["channel"], 
                                        thread_ts=body["event"]["event_ts"],
-                                       text=f"Hello from your bot! :robot_face: \nThanks for your request, I'm on it!")
+                                       text=f"{openai_ack_msg}")
     
     # Check ChatGPT
-    openai.api_key = os.environ['OPENAI_API_KEY']
+    openai.api_key = openai_api_key
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        engine=openai_engine,
         prompt=prompt,
-        max_tokens=1024,
+        max_tokens=openai_max_tokens,
         n=1,
         stop=None,
         temperature=0.5).choices[0].text
@@ -43,7 +49,7 @@ def handle_message_events(body, logger):
     # Reply to thread 
     response = client.chat_postMessage(channel=body["event"]["channel"], 
                                        thread_ts=body["event"]["event_ts"],
-                                       text=f"Here you go: \n{response}")
+                                       text=f"{openai_reply_msg}")
 
 if __name__ == "__main__":
     SocketModeHandler(app, slack_app_token).start()
