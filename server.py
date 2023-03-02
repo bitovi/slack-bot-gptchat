@@ -12,7 +12,7 @@ slack_app_token = os.environ['SLACK_BOT_APP_TOKEN']
 slack_bot_token = os.environ['SLACK_API_KEY']
 # Optional Environment variables
 openai_engine = os.environ.get('OPENAI_ENGINE', 'gpt-3.5-turbo')
-openai_max_tokens = os.environ.get('OPENAI_MAX_TOKENS', '1024')
+openai_max_tokens = int(os.environ.get('OPENAI_MAX_TOKENS', '1024'))
 openai_ack_msg = os.environ.get('OPENAI_ACK_MSG', "Hello from your bot! :robot_face: \nThanks for your request, I'm on it!")
 openai_reply_msg = os.environ.get('OPENAI_REPLY_MSG', "Here you go: \n")
 
@@ -41,7 +41,7 @@ def handle_message_events(body, logger):
     if openai_engine.startswith('gpt-3.'):
         response = openai.ChatCompletion.create(
             model=openai_engine,
-            max_tokens=int(openai_max_tokens),
+            max_tokens=openai_max_tokens,
             stop=None,
             temperature=0.5,
             messages=[
@@ -53,7 +53,7 @@ def handle_message_events(body, logger):
         response = openai.Completion.create(
             engine=openai_engine,
             prompt=prompt,
-            max_tokens=int(openai_max_tokens),
+            max_tokens=openai_max_tokens,
             n=1,
             stop=None,
             temperature=0.5).choices[0].text
