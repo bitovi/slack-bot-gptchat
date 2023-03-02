@@ -12,7 +12,7 @@ slack_app_token = os.environ['SLACK_BOT_APP_TOKEN']
 slack_bot_token = os.environ['SLACK_API_KEY']
 # Optional Environment variables
 openai_engine = os.environget('OPENAI_ENGINE', 'gpt-3.5-turbo')
-openai_tokens = os.environget('OPENAI_TOKENS', '4096')
+openai_tokens = os.environget('OPENAI_TOKENS', '1024')
 openai_ack_msg = os.environget('OPENAI_ACK_MSG', "Hello from your bot! :robot_face: \nThanks for your request, I'm on it!")
 openai_reply_msg = os.environget('OPENAI_REPLY_MSG', "Here you go: \n")
 
