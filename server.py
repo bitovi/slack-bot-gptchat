@@ -41,6 +41,9 @@ def handle_message_events(body, logger):
     if openai_engine.startswith('gpt-3.'):
         response = openai.ChatCompletion.create(
             model=openai_engine,
+            max_tokens=int(openai_max_tokens),
+            stop=None,
+            temperature=0.5,
             messages=[
                 {"role": "user", "content": f"{prompt}"},
             ]
