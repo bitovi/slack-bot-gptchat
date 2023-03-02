@@ -73,7 +73,7 @@ SLACK_API_KEY="xoxb-......."
 You can add the following variables too, if you feel the need to adjust them:
 ```
 OPENAI_ENGINE="gpt-3.5-turbo"
-OPENAI_TOKENS="4096"
+OPENAI_MAX_TOKENS="1024"
 OPENAI_ACK_MSG="Hello from your bot! :robot_face: \nThanks for your request, I'm on it!"
 OPENAI_REPLY_MSG="Here you go: \n"
 ```
