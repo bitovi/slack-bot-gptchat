@@ -77,7 +77,7 @@ OPENAI_MAX_TOKENS="1024"
 OPENAI_ACK_MSG="Hello from your bot! :robot_face: \nThanks for your request, I'm on it!"
 OPENAI_REPLY_MSG="Here you go: \n"
 ```
-See OpenAI engine models (here)[https://platform.openai.com/docs/models]
+See OpenAI engine models [here](https://platform.openai.com/docs/models)
 
 ## Step 5: Create a GitHub Action workflow file
 `.github/workflows/deploy.yaml`
