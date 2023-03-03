@@ -3,6 +3,7 @@ import openai
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack import WebClient
 from slack_bolt import App
+import json
 
 # TODO: rename .env.example
 
@@ -21,6 +22,10 @@ openai_reply_msg = os.environ.get('OPENAI_REPLY_MSG', "Here you go: \n")
 app = App(token=slack_bot_token) 
 client = WebClient(slack_bot_token)
 
+persona_list=None
+with open('persona.json', 'r') as f:
+    persona_list = json.load(f)
+
 # This gets activated when the bot is tagged in a channel    
 @app.event("app_mention")
 def handle_message_events(body, logger):
@@ -29,11 +34,21 @@ def handle_message_events(body, logger):
     
     # Create prompt for ChatGPT
     prompt = str(body["event"]["text"]).split(">")[1]
+
+    # Build Persona
+    if "be truthful" in prompt.lower():
+        prompt = prompt.replace("be truthful", "")
+        persona = persona_list['truthful']['persona']
+    if "be funny" in prompt.lower():
+        prompt=prompt.replace("be funny", "")
+        persona = persona_list['funny']['persona']
+    else:
+        persona = persona_list['default']['persona']
     
     # Let thre user know that we are busy with the request 
     response = client.chat_postMessage(channel=body["event"]["channel"], 
                                        thread_ts=body["event"]["event_ts"],
-                                       text=f"{openai_ack_msg}")
+                                       text=f"{openai_ack_msg}",)
     
     # Check ChatGPT
     openai.api_key = openai_api_key
@@ -44,9 +59,10 @@ def handle_message_events(body, logger):
             max_tokens=openai_max_tokens,
             stop=None,
             temperature=0.5,
-            messages=[
-                {"role": "user", "content": f"{prompt}"},
-            ]
+            messages=[{
+                "role": "system", "content": persona,
+                "role": "user", "content": f"{prompt}"
+            },]
         ).choices[0].message.content
 
     else:
