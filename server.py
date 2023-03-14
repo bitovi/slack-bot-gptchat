@@ -38,7 +38,7 @@ def handle_message_events(body, logger):
     # Check ChatGPT
     openai.api_key = openai_api_key
 
-    if openai_engine.startswith('gpt-3.'):
+    if openai_engine.startswith('gpt-'):
         response = openai.ChatCompletion.create(
             model=openai_engine,
             max_tokens=openai_max_tokens,
